@@ -3,7 +3,7 @@
 
 import Foundation
 
-public enum DebouceState<Value> {
+public enum DebouceState<Value>: Equatable where Value: Equatable {
     case debouncing(value: Value, debounced: Value)
     case idle(Value)
 

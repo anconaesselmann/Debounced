@@ -45,22 +45,33 @@ public struct PublishedDebounced<Value>
 
 public extension PublishedDebounced {
     var states: AnyPublisher<DebouceState<Value>, Never> {
-        _state.eraseToAnyPublisher()
+        _state
+            .removeDuplicates()
+            .eraseToAnyPublisher()
     }
     var debounced: AnyPublisher<Value, Never> {
-        _state.map { $0.debouncedValue }.eraseToAnyPublisher()
+        states
+            .map { $0.debouncedValue }
+            .removeDuplicates()
+            .eraseToAnyPublisher()
     }
 
     var value: AnyPublisher<Value, Never> {
-        _state.map { $0.value }.eraseToAnyPublisher()
+        states
+            .map { $0.value }
+            .removeDuplicates()
+            .eraseToAnyPublisher()
     }
 
     var isDebouncing: AnyPublisher<Bool, Never> {
-        _state.map { $0.isDebouncing }.eraseToAnyPublisher()
+        states
+            .map { $0.isDebouncing }
+            .removeDuplicates()
+            .eraseToAnyPublisher()
     }
 
     var objectWillChange: AnyPublisher<Void, Never> {
-        _state
+        states
             .filter { !$0.isDebouncing }
             .map { _ in return }
             .eraseToAnyPublisher()
