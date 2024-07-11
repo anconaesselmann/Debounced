@@ -1,0 +1,20 @@
+{
+  "info": "This file is used to manage swift packages through the command line. For more info visit https://github.com/anconaesselmann/CLSPM",
+  "dependencies" : [
+    {
+      "id": "42AE87DD-55AE-4A94-AD74-43591B2AD3C9",
+      "name": "Debounced",
+      "local_path" : "../../",
+      "use_local" : true
+    }
+  ],
+  "targets" : [
+    {
+      "dependencies" : [
+        "Debounced"
+      ],
+      "id" : "9376D135-959B-4AE5-ABA1-EF779C4EF9A5",
+      "name" : "DebouncedExample_01"
+    }
+  ]
+}
