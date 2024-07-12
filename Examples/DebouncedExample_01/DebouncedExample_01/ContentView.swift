@@ -14,7 +14,7 @@ struct ContentView: View {
             TextField("This text gets debounced", text: $text)
             Text("Debounced: \"\(text)\"")
             if _text.isDebouncing {
-                Text("Debouncing \"\(_text.value)\"...")
+                Text("Typing \"\(_text.value)\"...")
                 ProgressView()
             }
             Spacer()
@@ -25,6 +25,9 @@ struct ContentView: View {
         }
         .onChange(of: text) { oldValue, newValue in
             print("Old debounced value: \"\(oldValue)\", new debounced value: \"\(newValue)\"")
+        }
+        .onChange(of: _text.isDebouncing) {
+            print(_text.isDebouncing ? "Typing" : "Debounced")
         }
     }
 }
