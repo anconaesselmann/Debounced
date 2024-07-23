@@ -22,7 +22,7 @@ class ContentViewModel: ObservableObject {
             .dropFirst()
             .sink { [weak self] in
                 switch $0 {
-                case .debouncing(value: let value, debounced: _):
+                case .debouncing(let value, debounced: _):
                     self?.value = value
                     self?.isDebouncing = true
                 case .idle(let debounced):

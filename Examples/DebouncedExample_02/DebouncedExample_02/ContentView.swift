@@ -23,7 +23,7 @@ class ContentViewModel: ObservableObject {
         _text.isDebouncing.assign(to: &$isDebouncing)
         // Note: changes made to "text" by the TextField do not
         // not update the view. To have access to each change before
-        // debouncing (not a common use case in my opinion) bind `value`
+        // debouncing (likely not a common use case) bind `value`
         // to a publisher:
         _text.value.assign(to: &$value)
     }

@@ -8,76 +8,31 @@ import Combine
 public struct PublishedDebounced<Value>
     where Value: Equatable
 {
+    private var vm: PublishedDebouncedWrapperModel<Value>
+
     public var wrappedValue: Value {
-        get { _state.value.value }
+        get { vm.notDebounced }
 
         nonmutating
-        set { set(newValue) }
+        set { vm.notDebounced = newValue }
     }
 
     public var projectedValue: Binding<Value> {
-        Binding { _state.value.value } set: { wrappedValue = $0 }
+        Binding { vm.notDebounced } set: { vm.notDebounced = $0 }
     }
 
-    private let delay: Double
-    private let timer = OptionalContainer<Timer>()
-    
-    private let _state: CurrentValueSubject<DebouceState<Value>, Never>
-
-    public init(
-        wrappedValue initialValue: Value,
-        for delay: TimeInterval
-    ) {
-        self._state = CurrentValueSubject<DebouceState<Value>, Never>(.idle(initialValue))
-        self.delay = delay
-    }
-
-    private func set(_ newValue: Value) {
-        guard newValue != _state.value.value else {
-            return
-        }
-        _state.send(_state.value.updated(newValue))
-        timer.set(delay: delay) {
-            _state.send(_state.value.debounced())
-        }
+    public init(wrappedValue: Value, for delay: Double) {
+        self.vm = PublishedDebouncedWrapperModel(
+            notDebounced: wrappedValue,
+            for: delay
+        )
     }
 }
 
 public extension PublishedDebounced {
-    var states: AnyPublisher<DebouceState<Value>, Never> {
-        _state
-            .removeDuplicates()
-            .eraseToAnyPublisher()
-    }
-    var debounced: AnyPublisher<Value, Never> {
-        states
-            .map { $0.debouncedValue }
-            .removeDuplicates()
-            .eraseToAnyPublisher()
-    }
-
-    var value: AnyPublisher<Value, Never> {
-        states
-            .map { $0.value }
-            .removeDuplicates()
-            .eraseToAnyPublisher()
-    }
-
-    var isDebouncing: AnyPublisher<Bool, Never> {
-        states
-            .map { $0.isDebouncing }
-            .removeDuplicates()
-            .eraseToAnyPublisher()
-    }
-
-    var objectWillChange: AnyPublisher<Void, Never> {
-        states
-            .filter { !$0.isDebouncing }
-            .map { _ in return }
-            .eraseToAnyPublisher()
-    }
-
-    var debouncedWrappedValue: Value {
-        _state.value.debouncedValue
-    }
+    var debounced: AnyPublisher<Value, Never> { vm.debouncedPublisher }
+    var value: AnyPublisher<Value, Never> { vm.notDebouncedPublisher }
+    var isDebouncing: AnyPublisher<Bool, Never> { vm.isDebouncingPublisher }
+    var debouncedWrappedValue: Value { vm.debounced }
+    var states: AnyPublisher<DebounceState<Value>, Never> { vm.statesPublisher }
 }

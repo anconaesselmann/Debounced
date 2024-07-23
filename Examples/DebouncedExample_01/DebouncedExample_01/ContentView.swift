@@ -21,7 +21,7 @@ struct ContentView: View {
         }
         .padding()
         .onChange(of: text) {
-            print("New debouced value: \"\(text)\"")
+            print("New debounced value: \"\(text)\"")
         }
         .onChange(of: text) { oldValue, newValue in
             print("Old debounced value: \"\(oldValue)\", new debounced value: \"\(newValue)\"")

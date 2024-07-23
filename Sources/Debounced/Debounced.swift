@@ -7,42 +7,32 @@ import SwiftUI
 public struct Debounced<Value>: DynamicProperty
     where Value: Equatable
 {
+    @StateObject
+    private var vm: DebouncedWrapperModel<Value>
+
     public var wrappedValue: Value {
-        get { debounced }
+        get { vm.debounced }
 
         nonmutating
-        set { set(newValue) }
+        set { vm.notDebounced = newValue }
     }
 
     public var projectedValue: Binding<Value> {
-        Binding { value } set: { wrappedValue = $0 }
+        Binding { vm.notDebounced } set: { vm.notDebounced = $0 }
     }
 
-    private let delay: Double
-    private let timer = OptionalContainer<Timer>()
-
-    @State
-    private var state: DebouceState<Value>
-
-    public init(
-        wrappedValue initialValue: Value,
-        for delay: TimeInterval
-    ) {
-        self.state = .idle(initialValue)
-        self.delay = delay
-    }
-
-    private func set(_ newValue: Value) {
-        guard newValue != value else {
-            return
-        }
-        state.update(newValue)
-        timer.set(delay: delay) { state.debounce() }
+    public init(wrappedValue: Value, for delay: Double) {
+        _vm = StateObject(
+            wrappedValue: DebouncedWrapperModel(
+                notDebounced: wrappedValue,
+                for: delay
+            )
+        )
     }
 }
 
 public extension Debounced {
-    var value: Value { state.value }
-    var debounced: Value { state.debouncedValue }
-    var isDebouncing: Bool { state.isDebouncing }
+    var value: Value { vm.notDebounced }
+    var debounced: Value { vm.debounced }
+    var isDebouncing: Bool { vm.isDebouncing }
 }
