@@ -21,18 +21,29 @@ public struct PublishedDebounced<Value>
         Binding { vm.notDebounced } set: { vm.notDebounced = $0 }
     }
 
-    public init(wrappedValue: Value, for delay: Double) {
+    public init(
+        wrappedValue: Value,
+        for dueTime: DispatchQueue.SchedulerTimeType.Stride
+    ) {
         self.vm = PublishedDebouncedWrapperModel(
             notDebounced: wrappedValue,
-            for: delay
+            for: dueTime
         )
     }
 }
 
 public extension PublishedDebounced {
-    var debounced: AnyPublisher<Value, Never> { vm.debouncedPublisher }
     var value: AnyPublisher<Value, Never> { vm.notDebouncedPublisher }
+    var debounced: AnyPublisher<Value, Never> { vm.debouncedPublisher }
     var isDebouncing: AnyPublisher<Bool, Never> { vm.isDebouncingPublisher }
-    var debouncedWrappedValue: Value { vm.debounced }
     var states: AnyPublisher<DebounceState<Value>, Never> { vm.statesPublisher }
+    
+    var debouncedWrappedValue: Value { vm.debounced }
+
+    public init(
+        wrappedValue: Value,
+        for delay: Double
+    ) {
+        self = .init(wrappedValue: wrappedValue, for: .seconds(delay))
+    }
 }

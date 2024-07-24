@@ -21,11 +21,14 @@ public struct Debounced<Value>: DynamicProperty
         Binding { vm.notDebounced } set: { vm.notDebounced = $0 }
     }
 
-    public init(wrappedValue: Value, for delay: Double) {
+    public init(
+        wrappedValue: Value,
+        for dueTime: DispatchQueue.SchedulerTimeType.Stride
+    ) {
         _vm = StateObject(
             wrappedValue: DebouncedWrapperModel(
                 notDebounced: wrappedValue,
-                for: delay
+                for: dueTime
             )
         )
     }
@@ -35,4 +38,11 @@ public extension Debounced {
     var value: Value { vm.notDebounced }
     var debounced: Value { vm.debounced }
     var isDebouncing: Bool { vm.isDebouncing }
+
+    public init(
+        wrappedValue: Value,
+        for delay: Double
+    ) {
+        self = .init(wrappedValue: wrappedValue, for: .seconds(delay))
+    }
 }

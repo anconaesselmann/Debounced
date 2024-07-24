@@ -4,28 +4,32 @@
 import Foundation
 import Combine
 
-class PublishedDebouncedWrapperModel<Value>: ObservableObject
+final internal class PublishedDebouncedWrapperModel<Value>: ObservableObject
     where Value: Equatable
 {
     @Published
-    var notDebounced: Value
+    internal var notDebounced: Value
 
     @Published
-    private(set) var debounced: Value
+    internal private(set) var debounced: Value
 
-    var isDebouncing: Bool {
-        debounced != notDebounced
-    }
-
-    init(notDebounced: Value, for delay: Double) {
+    internal init(
+        notDebounced: Value,
+        for dueTime: DispatchQueue.SchedulerTimeType.Stride
+    ) {
         self.notDebounced = notDebounced
         self.debounced = notDebounced
         $notDebounced.debounce(
-            for: .seconds(delay),
+            for: dueTime,
             scheduler: DispatchQueue.main
         ).assign(to: &$debounced)
     }
+}
 
+internal extension PublishedDebouncedWrapperModel {
+    var isDebouncing: Bool {
+        debounced != notDebounced
+    }
     var notDebouncedPublisher: AnyPublisher<Value, Never> {
         $notDebounced.eraseToAnyPublisher()
     }
@@ -39,7 +43,6 @@ class PublishedDebouncedWrapperModel<Value>: ObservableObject
             .removeDuplicates()
             .eraseToAnyPublisher()
     }
-
     var statesPublisher: AnyPublisher<DebounceState<Value>, Never> {
         notDebouncedPublisher
             .combineLatest(debouncedPublisher)

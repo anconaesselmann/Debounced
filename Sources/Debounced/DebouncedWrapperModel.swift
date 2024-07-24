@@ -4,25 +4,30 @@
 import SwiftUI
 
 @MainActor
-class DebouncedWrapperModel<Value>: ObservableObject
+final internal class DebouncedWrapperModel<Value>: ObservableObject
     where Value: Equatable
 {
     @Published
-    var notDebounced: Value
+    internal var notDebounced: Value
 
     @Published
-    private(set) var debounced: Value
+    internal private(set) var debounced: Value
 
-    var isDebouncing: Bool {
-        debounced != notDebounced
-    }
-
-    init(notDebounced: Value, for delay: Double) {
+    internal init(
+        notDebounced: Value,
+        for dueTime: DispatchQueue.SchedulerTimeType.Stride
+    ) {
         self.notDebounced = notDebounced
         self.debounced = notDebounced
         $notDebounced.debounce(
-            for: .seconds(delay),
+            for: dueTime,
             scheduler: DispatchQueue.main
         ).assign(to: &$debounced)
+    }
+}
+
+internal extension DebouncedWrapperModel {
+    var isDebouncing: Bool {
+        debounced != notDebounced
     }
 }
