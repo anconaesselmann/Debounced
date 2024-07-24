@@ -4,9 +4,18 @@
 import SwiftUI
 import Debounced
 
+@main
+struct DebouncedExample_02App: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+    }
+}
+
 @MainActor
 class ContentViewModel: ObservableObject {
-    @PublishedDebounced(for: 1)
+    @PublishedDebounced(for: .seconds(1))
     var text: String = ""
 
     @Published

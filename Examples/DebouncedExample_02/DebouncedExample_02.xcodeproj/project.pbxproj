@@ -3,24 +3,17 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		973F0F2A2C4071EC007D8BA2 /* DebouncedExample_02App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973F0F292C4071EC007D8BA2 /* DebouncedExample_02App.swift */; };
-		973F0F2C2C4071EC007D8BA2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973F0F2B2C4071EC007D8BA2 /* ContentView.swift */; };
-		973F0F2E2C4071EE007D8BA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 973F0F2D2C4071EE007D8BA2 /* Assets.xcassets */; };
-		973F0F322C4071EE007D8BA2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 973F0F312C4071EE007D8BA2 /* Preview Assets.xcassets */; };
 		9376D13555AE4A94AD744359 /* Debounced in Frameworks */ = {isa = PBXBuildFile; productRef = 9376D135AD7443591B2AD3C9 /* Debounced */; };
+		973F0F2A2C4071EC007D8BA2 /* Example_02.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973F0F292C4071EC007D8BA2 /* Example_02.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		973F0F262C4071EC007D8BA2 /* DebouncedExample_02.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DebouncedExample_02.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		973F0F292C4071EC007D8BA2 /* DebouncedExample_02App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebouncedExample_02App.swift; sourceTree = "<group>"; };
-		973F0F2B2C4071EC007D8BA2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		973F0F2D2C4071EE007D8BA2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		973F0F2F2C4071EE007D8BA2 /* DebouncedExample_02.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DebouncedExample_02.entitlements; sourceTree = "<group>"; };
-		973F0F312C4071EE007D8BA2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		973F0F292C4071EC007D8BA2 /* Example_02.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example_02.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,7 +31,7 @@
 		973F0F1D2C4071EC007D8BA2 = {
 			isa = PBXGroup;
 			children = (
-				973F0F282C4071EC007D8BA2 /* DebouncedExample_02 */,
+				973F0F292C4071EC007D8BA2 /* Example_02.swift */,
 				973F0F272C4071EC007D8BA2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -49,26 +42,6 @@
 				973F0F262C4071EC007D8BA2 /* DebouncedExample_02.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		973F0F282C4071EC007D8BA2 /* DebouncedExample_02 */ = {
-			isa = PBXGroup;
-			children = (
-				973F0F292C4071EC007D8BA2 /* DebouncedExample_02App.swift */,
-				973F0F2B2C4071EC007D8BA2 /* ContentView.swift */,
-				973F0F2D2C4071EE007D8BA2 /* Assets.xcassets */,
-				973F0F2F2C4071EE007D8BA2 /* DebouncedExample_02.entitlements */,
-				973F0F302C4071EE007D8BA2 /* Preview Content */,
-			);
-			path = DebouncedExample_02;
-			sourceTree = "<group>";
-		};
-		973F0F302C4071EE007D8BA2 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				973F0F312C4071EE007D8BA2 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,8 +108,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				973F0F322C4071EE007D8BA2 /* Preview Assets.xcassets in Resources */,
-				973F0F2E2C4071EE007D8BA2 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,8 +118,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				973F0F2C2C4071EC007D8BA2 /* ContentView.swift in Sources */,
-				973F0F2A2C4071EC007D8BA2 /* DebouncedExample_02App.swift in Sources */,
+				973F0F2A2C4071EC007D8BA2 /* Example_02.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,10 +244,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = DebouncedExample_02/DebouncedExample_02.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"DebouncedExample_02/Preview Content\"";
 				DEVELOPMENT_TEAM = D7MN23CD5F;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -297,7 +265,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.anconaesselmann.DebouncedExample-02";
+				PRODUCT_BUNDLE_IDENTIFIER = "DebouncedExample-02";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -312,10 +280,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = DebouncedExample_02/DebouncedExample_02.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"DebouncedExample_02/Preview Content\"";
 				DEVELOPMENT_TEAM = D7MN23CD5F;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -335,7 +301,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.anconaesselmann.DebouncedExample-02";
+				PRODUCT_BUNDLE_IDENTIFIER = "DebouncedExample-02";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";

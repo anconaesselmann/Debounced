@@ -4,6 +4,15 @@
 import SwiftUI
 import Debounced
 
+@main
+struct DebouncedExample_01App: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+    }
+}
+
 struct ContentView: View {
 
     @Debounced(for: 1.0)

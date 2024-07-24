@@ -5,10 +5,19 @@ import SwiftUI
 import Combine
 import Debounced
 
+@main
+struct DebouncedExample_03App: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+    }
+}
+
 @MainActor
 class ContentViewModel: ObservableObject {
 
-    @PublishedDebounced(for: 1)
+    @PublishedDebounced(for: 1.0)
     var text: String = ""
 
     var debounced: String = ""
